@@ -10,16 +10,16 @@ import os
 # class to store conversion data
 class Conversion:
     # initialses an instance
-    def __init__(self,currancy1,currancy2,amount,result=0.0,rate=0.0):
-        self.currancy1 = currancy1
-        self.currancy2 = currancy2
+    def __init__(self,currency1,currency2,amount,result=0.0,rate=0.0):
+        self.currency1 = currency1
+        self.currency2 = currency2
         self.rate = rate
         self.amount = amount
         self.result = result
 
     # determines the output when instance is called
     def __str__(self):
-        return f"""Conversion from {self.currancy1} to {self.currancy2}
+        return f"""Conversion from {self.currency1} to {self.currency2}
 Amount: {self.amount}
 Rate: {"%.5f" % float(self.rate)}
 Result: {"%.2f" % float(self.result)}
@@ -30,21 +30,21 @@ Date: {datetime.utcnow().date()}"""
 def get_data(conversion):
     # try except to catch invalid inputs
     try:
-        # gets exchane data for currancy 1
-        url = "http://www.floatrates.com/daily/" + conversion.currancy1 + ".json"
+        # gets exchane data for currency 1
+        url = "http://www.floatrates.com/daily/" + conversion.currency1 + ".json"
         with urlopen(url) as response:
             source = response.read()
 
         # converts text from url into a python dictonary
         data = json.loads(source)
         # gets the rate of exchange and calculates the resulting amount
-        conversion.rate = data[conversion.currancy2]["rate"]
+        conversion.rate = data[conversion.currency2]["rate"]
         conversion.result = (conversion.amount * float(conversion.rate))
         error_message = None
     except urllib.error.URLError:
         error_message = "Could not connect to internet, please try again later"
     except:
-        error_message = "One or both of your currancy codes are invalid"
+        error_message = "One or both of your currency codes are invalid"
     return error_message
 
 
@@ -96,21 +96,21 @@ def display_message():
 
 # creates window and sets its attributes
 window = Tk()
-window.title("Currancy Converter")
+window.title("currency Converter")
 window.geometry("300x260")
 window.configure(background='#b1dbe6')
 
 # Heading label
-Label(window, text="Currancy Converter", font="Times 20 bold", bg="#b1dbe6").grid(row=0, column=0)
+Label(window, text="currency Converter", font="Times 20 bold", bg="#b1dbe6").grid(row=0, column=0)
 Label(window, text="From:", font="Broadway 15", bg="#b1dbe6").grid(row=1, column=0)
 
-# input field for currancy 1
+# input field for currency 1
 C1_input = Entry(window, width=4)
 C1_input.grid(row=1, column=1)
 
 Label(window, text="To:", font="Broadway 15", bg="#b1dbe6").grid(row=2, column=0)
 
-# input field for currancy 2
+# input field for currency 2
 C2_input = Entry(window, width=4)
 C2_input.grid(row=2, column=1)
 
