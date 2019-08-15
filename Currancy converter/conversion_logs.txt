@@ -1,2 +1,2 @@
-Currancy conversion log
+Currency conversion log
 
