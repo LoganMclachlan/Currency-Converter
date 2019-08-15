@@ -1,6 +1,7 @@
 from tkinter import mainloop, Tk, Label, Entry, Button, END, Text
 import json
 from urllib.request import urlopen
+import urllib.error
 from datetime import datetime
 import os
 
@@ -40,6 +41,8 @@ def get_data(conversion):
         conversion.rate = data[conversion.currancy2]["rate"]
         conversion.result = (conversion.amount * float(conversion.rate))
         error_message = None
+    except urllib.error.URLError:
+        error_message = "Could not connect to internet, please try again later"
     except:
         error_message = "One or both of your currancy codes are invalid"
     return error_message
