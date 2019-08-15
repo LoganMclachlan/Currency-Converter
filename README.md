@@ -1,7 +1,7 @@
 # Currency-Convertor
 
 ## main app
-python app that uses json data to convert an amount from one currancy to another.
+python app that uses json data to convert an amount from one currency to another.
 App gets the exchange rate data from the website http://www.floatrates.com/daily/gbp.json.
 * gbp can be replaced by other currancy codes to view there rates.
 
@@ -11,7 +11,7 @@ Once a successful conversion occurs, the program will write the related data and
 
 
 ## currancies avalible
-This will list all currancies that can be used in the main program aswell as the code for each.
+This will list all currencies that can be used in the main program aswell as the code for each.
 
 ## conversion log
 This is the text file that will contian the data for each successful conversion
