@@ -1,7 +1,6 @@
 from tkinter import mainloop, Tk, Label, Entry, Button, END, Text
 import json
 from urllib.request import urlopen
-import urllib.error
 from datetime import datetime
 import os
 
@@ -41,10 +40,9 @@ def get_data(conversion):
         conversion.rate = data[conversion.currency2]["rate"]
         conversion.result = (conversion.amount * float(conversion.rate))
         error_message = None
-    except urllib.error.URLError:
-        error_message = "Could not connect to internet, please try again later"
     except:
-        error_message = "One or both of your currency codes are invalid"
+        error_message = "An error occured, please check internet and currency codes."
+        
     return error_message
 
 
@@ -94,34 +92,38 @@ def display_message():
     
 # --------------------------------------------------------------------------- #
 
-# creates window and sets its attributes
-window = Tk()
-window.title("currency Converter")
-window.geometry("300x260")
-window.configure(background='#b1dbe6')
+def Main():
+    # creates window and sets its attributes
+    window = Tk()
+    window.title("currency Converter")
+    window.geometry("300x260")
+    window.configure(background='#b1dbe6')
 
-# Heading label
-Label(window, text="currency Converter", font="Times 20 bold", bg="#b1dbe6").grid(row=0, column=0)
-Label(window, text="From:", font="Broadway 15", bg="#b1dbe6").grid(row=1, column=0)
+    # Heading label
+    Label(window, text="currency Converter", font="Times 20 bold", bg="#b1dbe6").grid(row=0, column=0)
+    Label(window, text="From:", font="Broadway 15", bg="#b1dbe6").grid(row=1, column=0)
 
-# input field for currency 1
-C1_input = Entry(window, width=4)
-C1_input.grid(row=1, column=1)
+    # input field for currency 1
+    C1_input = Entry(window, width=4)
+    C1_input.grid(row=1, column=1)
 
-Label(window, text="To:", font="Broadway 15", bg="#b1dbe6").grid(row=2, column=0)
+    Label(window, text="To:", font="Broadway 15", bg="#b1dbe6").grid(row=2, column=0)
 
-# input field for currency 2
-C2_input = Entry(window, width=4)
-C2_input.grid(row=2, column=1)
+    # input field for currency 2
+    C2_input = Entry(window, width=4)
+    C2_input.grid(row=2, column=1)
 
-Label(window, text="Amount:", font="Broadway 15", bg="#b1dbe6").grid(row=3, column=0)
+    Label(window, text="Amount:", font="Broadway 15", bg="#b1dbe6").grid(row=3, column=0)
 
-# input field for amount
-amount_input = Entry(window, width=7)
-amount_input.grid(row=3, column=1)
+    # input field for amount
+    amount_input = Entry(window, width=7)
+    amount_input.grid(row=3, column=1)
 
-# button to start convert
-Button(window, text="Calculate", command=display_message, bg="black", fg="white").grid(row=4, column=0)
+    # button to start convert
+    Button(window, text="Calculate", command=display_message, bg="black", fg="white").grid(row=4, column=0)
 
-# keeps window up
-window.mainloop()
+    # keeps window up
+    window.mainloop()
+    
+if __name__ == '__main__':
+    Main()
